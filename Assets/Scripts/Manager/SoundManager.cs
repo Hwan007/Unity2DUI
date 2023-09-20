@@ -27,7 +27,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeBackGroundMusic(musicClip);
+        if (musicClip)
+            ChangeBackGroundMusic(musicClip);
     }
 
     public static void ChangeBackGroundMusic(AudioClip musicClip)

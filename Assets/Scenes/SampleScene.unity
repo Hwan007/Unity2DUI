@@ -1289,6 +1289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894306089}
   - component: {fileID: 894306090}
+  - component: {fileID: 894306091}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1323,6 +1324,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b155dbb6a69264296b8ec5dcba834c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundEffectVolume: 0
+  soundEffectPitchVariance: 0
+  musicVolume: 0
+  musicClip: {fileID: 0}
+--- !u!114 &894306091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894306088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0430f9774ac04c8468a0ad2bfc44f261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resizeSize: 20
+  _maxSize: 100
+  pools:
+  - tag: SoundSource
+    prefab: {fileID: 5279694309297163117, guid: c0edce56d3e4ba347820085f39e65e0a, type: 3}
+    size: 20
 --- !u!1 &897939497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,7 +2066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3afea58932da0a4baf822bc9eb0d1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instance: {fileID: 0}
+  Datas: []
   IDStackSize: 50
   ResizeStackSize: 20
 --- !u!1 &1599268668
@@ -2556,7 +2579,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats: {fileID: 11400000, guid: eb5d8d3fbcfbcd54b9b154a3ac6d88da, type: 2}
-  StatsModifiers: []
 --- !u!1 &1803470255
 GameObject:
   m_ObjectHideFlags: 0
