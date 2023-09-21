@@ -28,4 +28,6 @@ public class StatModifyConsumeItemSO : BaseItemData, IConsumable
         else
             Debug.Log($"{receiver.name} don't have \"CharacterStatsController\" component");
     }
+
+    public CharacterStats GetModifier() { return modifier; }
 }

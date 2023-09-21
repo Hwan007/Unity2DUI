@@ -8,6 +8,7 @@ public enum eUIType
     Gold,
     Text,
     InventoryItem,
+    OX,
     //TextTemp,
     //ImageTemp,
 }
@@ -24,11 +25,9 @@ public class UIObjectPool : MonoBehaviour
     
     [SerializeField] private int _resizeSize;
     [SerializeField] private int _maxSize;
-
+    [SerializeField] private RectTransform _root;
     public List<Pool> pools;
     public Dictionary<eUIType, Queue<GameObject>> poolDictionary;
-
-    [SerializeField] private RectTransform _root;
 
     private void Awake()
     {

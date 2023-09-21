@@ -72,10 +72,17 @@ public class UIManager : MonoBehaviour
         var obj = UIObjectPool.SpawnFromPool(type);
         if (obj != null)
         {
-            if (type < eUIType.Text)
+            if (type == eUIType.Store || type == eUIType.Inventory || type == eUIType.Gold)
             {
                 var uiClass = obj.GetComponentInChildren<UIBase>();
                 UIOpened.Insert(0, uiClass);
+
+                obj.SetActive(true);
+                return uiClass as T;
+            }
+            else if (type == eUIType.InventoryItem || type == eUIType.OX)
+            {
+                var uiClass = obj.GetComponent<UIBase>();
 
                 obj.SetActive(true);
                 return uiClass as T;

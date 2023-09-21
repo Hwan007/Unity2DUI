@@ -38,7 +38,7 @@ public class InventoryController : MonoBehaviour
         Inventory.Initialize(items);
         foreach (var index in equipIndex)
         {
-            Equipment.TryEquip(Inventory.GetItemAtIndex<EquipItemSO>(index), index);
+            Equipment.TryEquip(Inventory.GetItemAtIndex<EquipItemSO>(index));
         }
     }
     private void BuyItem(BaseItemData item)
