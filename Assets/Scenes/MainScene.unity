@@ -1860,8 +1860,12 @@ MonoBehaviour:
     prefab: {fileID: 6480914336865721675, guid: 279601501e5c04e46a1e3ef17e76ecde, type: 3}
     size: 1
   - tag: 2
+    prefab: {fileID: 8320880587308644307, guid: 69fc3a304d08fd447bf9d2a988cc9917, type: 3}
+    size: 1
+  - tag: 3
     prefab: {fileID: 7093784319294958146, guid: 9f0ed48659535f24aa997cc4502dfd8b, type: 3}
     size: 5
+  _root: {fileID: 0}
 --- !u!1 &1797785561 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3040554324636143739, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
@@ -1875,6 +1879,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2711862936398080522, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
+      propertyPath: testItem.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2711862936398080522, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
+      propertyPath: testItem.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c775142703227ba40b030bb2593a841a, type: 2}
+    - target: {fileID: -2711862936398080522, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
+      propertyPath: testItem.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9af59c756143c8d4f85c653ace151ce5, type: 2}
+    - target: {fileID: -2711862936398080522, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
+      propertyPath: testItem.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 88d298ebe6dec194194f0fdd25db052a, type: 2}
+    - target: {fileID: -2711862936398080522, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
+      propertyPath: testItem.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2eec961c84094ed479dca10c30eabb66, type: 2}
+    - target: {fileID: -2711862936398080522, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
+      propertyPath: testItem.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 01c87c324357aec44b233bd56cb88cf1, type: 2}
     - target: {fileID: 3040554324636143739, guid: bfeed371f0eacd0458cfa66d10b95443, type: 3}
       propertyPath: m_Name
       value: Player

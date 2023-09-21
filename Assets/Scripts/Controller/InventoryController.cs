@@ -10,6 +10,15 @@ public class InventoryController : MonoBehaviour
     public EquipmentSystem Equipment { get; private set; } = new EquipmentSystem();
 
     private PlayerInfoController _playerInfoController;
+
+    [SerializeField] private bool TEST;
+    [SerializeField] private List<BaseItemData> testItem;
+
+    private void Awake()
+    {
+        if (TEST && testItem.Count > 0)
+            Inventory.Initialize(testItem.ToArray());
+    }
     private void Start()
     {
         _playerInfoController = GetComponent<PlayerInfoController>();

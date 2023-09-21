@@ -7,6 +7,7 @@ public enum eUIType
     Store,
     Gold,
     Text,
+    InventoryItem,
     //TextTemp,
     //ImageTemp,
 }
@@ -27,6 +28,8 @@ public class UIObjectPool : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<eUIType, Queue<GameObject>> poolDictionary;
 
+    [SerializeField] private RectTransform _root;
+
     private void Awake()
     {
         poolDictionary = new Dictionary<eUIType, Queue<GameObject>>();
@@ -35,7 +38,11 @@ public class UIObjectPool : MonoBehaviour
             Queue<GameObject> objectsPool = new Queue<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj;
+                if (_root == null)
+                    obj = Instantiate(pool.prefab);
+                else
+                    obj = Instantiate(pool.prefab, _root);
                 obj.SetActive(false);
                 objectsPool.Enqueue(obj);
             }
