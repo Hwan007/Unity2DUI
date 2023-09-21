@@ -43,6 +43,7 @@ public class CharacterStatsController : MonoBehaviour
     {
         CurrentStats = ScriptableObject.CreateInstance<CharacterStats>();
         UpdateStats((a, b) => b, baseStats);
+        StatsModifiers.AddLast(baseStats);
     }
 
     private void UpdateCharacterStats()

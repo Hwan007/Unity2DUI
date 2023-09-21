@@ -15,6 +15,13 @@ public class EquipmentSystem : EquipmentEvents
     public EquipItemSO Arm { get => _equipItemSOs[(int)eEquipPart.Arm]; }
     public EquipItemSO Leg { get => _equipItemSOs[(int)eEquipPart.Leg]; }
     public EquipItemSO Weapon { get => _equipItemSOs[(int)eEquipPart.Weapon]; }
+    private CharacterStatsController _characterStatsController;
+
+    public void Init(CharacterStatsController characterStatsController)
+    {
+        _characterStatsController = characterStatsController;
+    }
+
 
     public void TryEquip(EquipItemSO item)
     {
@@ -22,11 +29,13 @@ public class EquipmentSystem : EquipmentEvents
         if (_equipItemSOs[(int)type] == null)
         {
             _equipItemSOs[(int)type] = item;
+            item.OnEquip(_characterStatsController);
             CallOnEquip();
         }
         else if (_equipItemSOs[(int)type] != null && !_equipItemSOs[(int)type].Equals(item))
         {
             _equipItemSOs[(int)type] = item;
+            item.OnEquip(_characterStatsController);
             CallOnEquip();
         }
     }
@@ -35,8 +44,17 @@ public class EquipmentSystem : EquipmentEvents
     {
         if (_equipItemSOs[(int)type] != null)
         {
+            _equipItemSOs[(int)type].OnUnEquip(_characterStatsController);
             _equipItemSOs[(int)type] = null;
             CallOnUnequip();
+        }
+    }
+
+    public void TryUnequip(EquipItemSO item)
+    {
+        if (CheckEquip(item))
+        {
+            TryUnequip(item.GetEquipPart());
         }
     }
 

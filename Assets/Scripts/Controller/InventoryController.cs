@@ -10,6 +10,7 @@ public class InventoryController : MonoBehaviour
     public EquipmentSystem Equipment { get; private set; } = new EquipmentSystem();
 
     private PlayerInfoController _playerInfoController;
+    private CharacterStatsController _characterStatsController;
 
     [SerializeField] private bool TEST;
     [SerializeField] private List<BaseItemData> testItem;
@@ -21,6 +22,8 @@ public class InventoryController : MonoBehaviour
     }
     private void Start()
     {
+        _characterStatsController = GetComponent<CharacterStatsController>();
+        Equipment.Init(_characterStatsController);
         _playerInfoController = GetComponent<PlayerInfoController>();
         Inventory.OnSell += SellItem;
         Inventory.OnBuy += BuyItem;

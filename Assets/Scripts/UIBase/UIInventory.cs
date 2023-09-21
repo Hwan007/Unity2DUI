@@ -40,7 +40,13 @@ public class UIInventory : UIBase
             var info = obj.GetComponent<UIItemInfo>();
 
             if (item is EquipItemSO)
-                info.InitInfo(item, _inventoryController.Equipment.CheckEquip(item as EquipItemSO), () => _uiItems.Remove(info), (x) => { if (x) _inventoryController.Equipment.TryEquip(item as EquipItemSO); });
+                info.InitInfo(item,
+                    _inventoryController.Equipment.CheckEquip(item as EquipItemSO),
+                    () => _uiItems.Remove(info),
+                    (x) => {
+                        if (x) _inventoryController.Equipment.TryEquip(item as EquipItemSO); 
+                        else _inventoryController.Equipment.TryUnequip(item as EquipItemSO);
+                    });
             else
                 info.InitInfo(item, false, () => _uiItems.Remove(info));
 
