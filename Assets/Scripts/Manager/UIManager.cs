@@ -12,26 +12,19 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private InputController _inputEvent;
 
-    [SerializeField] private GameObject Status;
-    [SerializeField] private GameObject Inventory;
-    [SerializeField] private GameObject Store;
-    [SerializeField] private TMP_Text Gold;
-    [SerializeField] private TMP_Text Name;
-    [SerializeField] private TMP_Text Level;
-
     private List<UIBase> UIOpened = new List<UIBase>();
 
     private CharacterStatsController _characterController;
     private HealthSystem _healthSystem;
-    private PlayerController _playerController;
-    private bool isOpenStatus = false;
+    private PlayerInfoController _playerInfoController;
+    private InventoryController _InventoryController;
 
-    //private UIObjectPool UIObjectPool;
+    private UIObjectPool UIObjectPool;
 
     private void Awake()
     {
         Instance = this;
-        //UIObjectPool = GetComponent<UIObjectPool>();
+        UIObjectPool = GetComponent<UIObjectPool>();
     }
 
     private void Start()
@@ -39,12 +32,26 @@ public class UIManager : MonoBehaviour
         _inputEvent.OnExitEvent += CloseTopUI;
         _characterController = GameManager.Instance.Player.GetComponent<CharacterStatsController>();
         _healthSystem = GameManager.Instance.Player.GetComponent<HealthSystem>();
+        _playerInfoController = GameManager.Instance.Player.GetComponent<PlayerInfoController>();
+        _InventoryController = GameManager.Instance.Player.GetComponent<InventoryController>();
 
-        _playerController = GameManager.Instance.Player.GetComponent<PlayerController>();
-        _playerController.OnNameChange += UpdateName;
-        _playerController.OnGoldChange += UpdateGold;
-        _playerController.OnLevelChange += UpdateLevel;
-        _playerController.RefreshInfo();
+        OpenNameLevel();
+        OpenGold();
+
+        _playerInfoController.OnNameChange += UpdateNameLevel;
+        _playerInfoController.OnGoldChange += UpdateGold;
+        _playerInfoController.OnLevelChange += UpdateNameLevel;
+        _playerInfoController.OnStatChange += UpdateStats;
+        _playerInfoController.RefreshInfo();
+    }
+
+    public void CloseUI<T>() where T : UIBase
+    {
+        var window = GetUI<T>();
+        if (window != null)
+        {
+            window.CloseUI();
+        }
     }
 
     public void CloseTopUI(bool isPressed)
@@ -53,41 +60,37 @@ public class UIManager : MonoBehaviour
         {
             if (UIOpened.Count > 0)
             {
+                if (UIOpened[0] is UIGold || UIOpened[0] is UINameLevel || UIOpened[0])
+                    return;
                 UIOpened[0].CloseUI();
             }
         }
     }
 
-    private UIBase ShowUI(eUIType type)
+    public T ShowUI<T>(eUIType type) where T : UIBase
     {
-        //var obj = UIObjectPool.SpawnFromPool(type);
-        GameObject obj = null;
-        switch (type)
-        {
-            case eUIType.Status:
-                obj = Status;
-                break;
-            case eUIType.Inventory:
-                obj = Inventory;
-                break;
-            case eUIType.Store:
-                obj = Store;
-                break;
-        }
+        var obj = UIObjectPool.SpawnFromPool(type);
         if (obj != null)
         {
-            var uiBase = obj.GetComponent<UIBase>();
-            UIOpened.Insert(0, uiBase);
+            if (type < eUIType.Text)
+            {
+                var uiClass = obj.GetComponentInChildren<UIBase>();
+                UIOpened.Insert(0, uiClass);
 
-            obj.SetActive(true);
-            return uiBase;
+                obj.SetActive(true);
+                return uiClass as T;
+            }
+            else
+            {
+                var uiClass = obj.transform.GetChild(0).gameObject.AddComponent<T>();
+                UIOpened.Insert(0, uiClass);
+
+                obj.SetActive(true);
+                return uiClass;
+            }
         }
         else
             return null;
-    }
-    public T ShowUI<T>(eUIType type) where T : UIBase
-    {
-        return ShowUI(type) as T;
     }
 
     public bool IsOpened<T>() where T : UIBase
@@ -125,16 +128,38 @@ public class UIManager : MonoBehaviour
 
     public void OpenStatus()
     {
-        if (!isOpenStatus)
+        if (GetUI<UIStatus>() == null)
         {
-            var window = UIManager.Instance.ShowUI<UIStatus>(eUIType.Status);
-            window.Initialize(_healthSystem, _characterController, () => { isOpenStatus = false; });
+            var window = UIManager.Instance.ShowUI<UIStatus>(eUIType.Text);
+            window.Initialize(_healthSystem, _characterController, () => { RemoveUIInList(window); });
+        }
+    }
+
+    public void OpenNameLevel()
+    {
+        if (GetUI<UINameLevel>() == null)
+        {
+            var window = UIManager.Instance.ShowUI<UINameLevel>(eUIType.Text);
+            window.Initialize(_playerInfoController);
+        }
+    }
+
+    private void OpenGold()
+    {
+        if (GetUI<UIGold>() == null)
+        {
+            var window = UIManager.Instance.ShowUI<UIGold>(eUIType.Gold);
+            window.Initialize(_playerInfoController);
         }
     }
 
     public void OpenInventory()
     {
-
+        if (GetUI<UIInventory>() == null)
+        {
+            var window = UIManager.Instance.ShowUI<UIInventory>(eUIType.Inventory);
+            window.Initialize(_InventoryController, () => { RemoveUIInList(window); });
+        }
     }
 
     public void OpenStore()
@@ -142,18 +167,30 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateName(string name)
+    public void UpdateNameLevel()
     {
-        Name.text = name;
+        if (GetUI<UINameLevel>() != null)
+        {
+            var window = GetUI<UINameLevel>();
+            window.Refresh();
+        }
     }
 
-    public void UpdateGold(int gold)
+    public void UpdateGold()
     {
-        Gold.text = gold.ToString();
+        if (GetUI<UIGold>() != null)
+        {
+            var window = GetUI<UIGold>();
+            window.Refresh();
+        }
     }
 
-    public void UpdateLevel(int level)
+    private void UpdateStats()
     {
-        Level.text = level.ToString();
+        if (GetUI<UIStatus>() != null)
+        {
+            var window = GetUI<UIStatus>();
+            window.Refresh();
+        }
     }
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum eUIType
 {
-    Status,
     Inventory,
     Store,
+    Gold,
+    Text,
+    //TextTemp,
+    //ImageTemp,
 }
 
 public class UIObjectPool : MonoBehaviour
@@ -17,7 +20,6 @@ public class UIObjectPool : MonoBehaviour
         public GameObject prefab;
         public int size;
     }
-    [SerializeField] private Canvas RootObject;
     
     [SerializeField] private int _resizeSize;
     [SerializeField] private int _maxSize;
@@ -33,7 +35,7 @@ public class UIObjectPool : MonoBehaviour
             Queue<GameObject> objectsPool = new Queue<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab, RootObject.transform);
+                GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
                 objectsPool.Enqueue(obj);
             }

@@ -17,7 +17,7 @@ public class PlayerInfo : ScriptableObject
     [SerializeField] private string _name;
 
     public void SetName(string name) { _name = name; }
-    public void SetGold(int gold) { _gold = gold; }
-    public void SetLevel(int level) { _level = level; }
+    public void ChangeGold(int gold) { _gold += gold; }
+    public void ChangeLevel(int level) { _level += level; }
 
 }

@@ -5,28 +5,28 @@ using UnityEngine;
 
 public class PlayerInfoEvents : MonoBehaviour
 {
-    public event Action<string> OnNameChange;
-    public event Action<int> OnGoldChange;
-    public event Action<int> OnLevelChange;
-    public event Action<CharacterStats> OnStatChange;
+    public event Action OnNameChange;
+    public event Action OnGoldChange;
+    public event Action OnLevelChange;
+    public event Action OnStatChange;
 
-    public void CallGoldChange(int gold)
+    public void CallGoldChange()
     {
-        OnGoldChange?.Invoke(gold);
+        OnGoldChange?.Invoke();
     }
 
-    public void CallLevelChange(int changeLevel)
+    public void CallLevelChange()
     {
-        OnLevelChange?.Invoke(changeLevel);
+        OnLevelChange?.Invoke();
     }
 
-    public void CallStatsChange(CharacterStats stats)
+    public void CallStatsChange()
     {
-        OnStatChange?.Invoke(stats);
+        OnStatChange?.Invoke();
     }
 
-    public void CallNameChange(string name)
+    public void CallNameChange()
     {
-        OnNameChange?.Invoke(name);
+        OnNameChange?.Invoke();
     }
 }

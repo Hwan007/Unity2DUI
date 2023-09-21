@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class EquipmentEvents
 {
-    public event Action<EquipItemSO> OnEquip;
-    public event Action<eEquipPart> OnUnequip;
+    public event Action OnEquip;
+    public event Action OnUnequip;
 
-    public void CallOnEquip(EquipItemSO item)
+    public void CallOnEquip()
     {
-        OnEquip?.Invoke(item);
+        OnEquip?.Invoke();
     }
 
-    public void CallOnUnequip(eEquipPart equipPart)
+    public void CallOnUnequip()
     {
-        OnUnequip?.Invoke(equipPart);
+        OnUnequip?.Invoke();
     }
 }

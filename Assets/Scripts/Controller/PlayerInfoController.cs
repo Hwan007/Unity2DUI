@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : PlayerInfoEvents
+public class PlayerInfoController : PlayerInfoEvents
 {
     private CharacterStatsController _characterStatsController;
     public PlayerInfo Info;
@@ -15,15 +15,12 @@ public class PlayerController : PlayerInfoEvents
     private void Start()
     {
         _characterStatsController = GetComponent<CharacterStatsController>();
-        OnNameChange += Info.SetName;
-        OnLevelChange += Info.SetLevel;
-        OnGoldChange += Info.SetGold;
     }
 
     public void RefreshInfo()
     {
-        CallGoldChange(Info.Gold);
-        CallNameChange(Info.Name);
-        CallLevelChange(Info.Level);
+        CallGoldChange();
+        CallNameChange();
+        CallLevelChange();
     }
 }

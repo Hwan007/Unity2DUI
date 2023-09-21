@@ -10,7 +10,8 @@ public abstract class BaseItemData : ScriptableObject
     [SerializeField] protected string Name;
     [SerializeField] protected string Description;
     [HideInInspector] protected int ID = -1;
-    [SerializeField] private Sprite icon;
+    [SerializeField] protected Sprite icon;
+    [SerializeField] protected int Price;
 
     public virtual string GetName()
     {
@@ -30,6 +31,23 @@ public abstract class BaseItemData : ScriptableObject
     {
         return icon;
     }
+    public virtual int GetPrice(eTradeType type)
+    {
+        switch (type)
+        {
+            case eTradeType.Sell:
+                return Price * GameManager.Instance.SellPercentage / 100;
+            case eTradeType.Buy:
+                return Price;
+        }
+        return Price;
+    }
+}
+
+public enum eTradeType
+{
+    Sell,
+    Buy,
 }
 
 public interface IPickupable

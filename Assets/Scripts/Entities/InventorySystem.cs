@@ -8,9 +8,19 @@ public class InventorySystem : InventoryEvents
 {
     private List<BaseItemData> Inven = new List<BaseItemData>();
 
+    public void Initialize(BaseItemData[] items)
+    {
+        Inven.AddRange(items);
+    }
+
     public BaseItemData GetItemAtIndex(int index)
     {
         return Inven[index];
+    }
+
+    public T GetItemAtIndex<T>(int index) where T : BaseItemData
+    {
+        return Inven[index] as T;
     }
 
     public BaseItemData[] GetItems() 
