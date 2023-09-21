@@ -17,7 +17,7 @@ public class UIObjectPool : MonoBehaviour
         public GameObject prefab;
         public int size;
     }
-    [SerializeField] private GameObject RootObject;
+    [SerializeField] private Canvas RootObject;
     
     [SerializeField] private int _resizeSize;
     [SerializeField] private int _maxSize;

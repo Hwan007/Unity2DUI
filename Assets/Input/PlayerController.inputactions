@@ -34,12 +34,21 @@
                 },
                 {
                     "name": "Click",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "5e097992-6f52-4dd1-bba7-028fce15e62b",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ClickToPosition",
+                    "type": "Button",
+                    "id": "7c763392-cd60-4018-87fd-57a364d23706",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -204,7 +213,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Click",
+                    "action": "ClickToPosition",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -215,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Basic",
-                    "action": "Click",
+                    "action": "ClickToPosition",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -226,9 +235,20 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Basic",
-                    "action": "Click",
+                    "action": "ClickToPosition",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "11e7a5ad-de87-48de-a64e-20eea9f53e68",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Basic",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

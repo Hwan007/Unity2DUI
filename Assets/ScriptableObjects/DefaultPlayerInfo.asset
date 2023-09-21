@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gold: 1000
   _level: 1
+  _icon: {fileID: 21300000, guid: 1e5fa8117ed42a243aa5524fde905cf2, type: 3}
+  _name: "\uC2A4\uD30C\uB974\uD0C4"

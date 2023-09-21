@@ -8,8 +8,7 @@ public class UIBase : MonoBehaviour
 {
     protected RectTransform _rectTransform;
     protected Canvas _canvas;
-    [SerializeField] protected TMP_Text _title;
-    [SerializeField] protected TMP_Text _data;
+    
 
     protected bool _isTemp;
 

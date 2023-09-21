@@ -21,7 +21,6 @@ public class InputController : EventController
     }
     public void OnEnter(InputValue value)
     {
-
         CallEnterEvent(value.isPressed);
         Debug.Log($"OnEnter {value.isPressed}");
     }
@@ -32,8 +31,13 @@ public class InputController : EventController
     }
     public void OnClick(InputValue value)
     {
-        Vector2 position = value.Get<Vector2>();
-        CallClickEvent(position);
+        CallClickEvent(value.isPressed);
+        Debug.Log($"OnClick {value.isPressed}");
+    }
+    public void OnClickToPosition(InputValue value)
+    {
+        var position = value.Get<Vector2>();
+        CallClickToPosition(position);
         Debug.Log($"OnClick {position}");
     }
 }

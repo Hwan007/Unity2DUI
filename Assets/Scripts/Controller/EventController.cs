@@ -8,7 +8,8 @@ public class EventController : MonoBehaviour
     public event Action<Vector2> OnMoveEvent;
     public event Action<bool> OnEnterEvent;
     public event Action<bool> OnExitEvent;
-    public event Action<Vector2> OnClickEvent;
+    public event Action<bool> OnClickEvent;
+    public event Action<Vector2> OnClickToPositionEvent;
 
     public void CallMoveEvent(Vector2 direction)
     {
@@ -22,8 +23,12 @@ public class EventController : MonoBehaviour
     {
         OnExitEvent?.Invoke(isPressed);
     }
-    public void CallClickEvent(Vector2 position)
+    public void CallClickEvent(bool isPressed)
     {
-        OnClickEvent?.Invoke(position);
+        OnClickEvent?.Invoke(isPressed);
+    }
+    public void CallClickToPosition(Vector2 position)
+    {
+        OnClickToPositionEvent?.Invoke(position);
     }
 }
