@@ -14,7 +14,7 @@ public class CharacterStatsController : MonoBehaviour
     private void Awake()
     {
         InitCharacterStats();
-        UpdateCharacterStats();
+        //UpdateCharacterStats();
     }
 
     private void Start()
@@ -41,7 +41,9 @@ public class CharacterStatsController : MonoBehaviour
 
     private void InitCharacterStats()
     {
+        CurrentStats = ScriptableObject.CreateInstance<CharacterStats>();
         UpdateStats((a, b) => b, baseStats);
+        StatsModifiers.AddLast(baseStats);
     }
 
     private void UpdateCharacterStats()

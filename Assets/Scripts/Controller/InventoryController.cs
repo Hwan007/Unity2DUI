@@ -2,40 +2,59 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InventoryController : MonoBehaviour
 {
-    public InventorySystem Inventory { get; private set; }
-    public EquipmentSystem Equipment { get; private set; }
+    public InventorySystem Inventory { get; private set; } = new InventorySystem();
+    public EquipmentSystem Equipment { get; private set; } = new EquipmentSystem();
 
-    public event Action OnEquip;
-    public event Action OnSell;
-    public event Action OnBuy;
-    public event Action OnRemove;
-    public event Action OnAdd;
+    private PlayerInfoController _playerInfoController;
+    private CharacterStatsController _characterStatsController;
 
-    public void CallOnEquip()
+    [SerializeField] private bool TEST;
+    [SerializeField] private List<BaseItemData> testItem;
+
+    private void Awake()
     {
-        OnEquip?.Invoke();
+        if (TEST && testItem.Count > 0)
+            Inventory.Initialize(testItem.ToArray());
+    }
+    private void Start()
+    {
+        _characterStatsController = GetComponent<CharacterStatsController>();
+        Equipment.Init(_characterStatsController);
+        _playerInfoController = GetComponent<PlayerInfoController>();
+        Inventory.OnSell += SellItem;
+        Inventory.OnBuy += BuyItem;
+        Equipment.OnEquip += RecalStats;
+        Equipment.OnUnequip += RecalStats;
     }
 
-    public void CallOnSell()
+    private void RecalStats()
     {
-        OnSell?.Invoke();
+        _playerInfoController.CallStatsChange();
     }
 
-    public void CallOnBuy()
+    public void Initialize(BaseItemData[] items, int[] equipIndex)
     {
-        OnBuy?.Invoke();
+        Inventory.Initialize(items);
+        foreach (var index in equipIndex)
+        {
+            Equipment.TryEquip(Inventory.GetItemAtIndex<EquipItemSO>(index));
+        }
+    }
+    private void BuyItem(BaseItemData item)
+    {
+        _playerInfoController.Info.ChangeGold(-item.GetPrice(eTradeType.Buy));
+        _playerInfoController.CallGoldChange();
     }
 
-    public void CallOnRemove()
+    private void SellItem(BaseItemData item)
     {
-        OnRemove?.Invoke();
+        _playerInfoController.Info.ChangeGold(item.GetPrice(eTradeType.Sell));
+        _playerInfoController.CallGoldChange();
     }
 
-    public void CallOnAdd()
-    {
-        OnAdd?.Invoke();
-    }
+    
 }

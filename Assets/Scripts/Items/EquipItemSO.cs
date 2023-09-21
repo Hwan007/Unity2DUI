@@ -29,4 +29,8 @@ public class EquipItemSO : BaseItemData, IEquipable
         character.RemoveStatModifier(statModifier);
         equipCharacter = null;
     }
+    public CharacterStats GetModifier()
+    {
+        return statModifier;
+    }
 }

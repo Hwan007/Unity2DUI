@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DefaultHealItem", menuName = "Scriptable Object/Item/HealItem", order = 3)]
@@ -21,4 +22,7 @@ public class HealConsumeItemSO : BaseItemData, IConsumable
             healthSystem.ChangeHealth(heal);
         }
     }
+
+    public int GetHealPoint()
+    { return heal; }
 }

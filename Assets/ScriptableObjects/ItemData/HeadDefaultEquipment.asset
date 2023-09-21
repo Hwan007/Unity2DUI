@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3b9229d1dc3e743b624ddfe48220e2, type: 3}
+  m_Name: HeadDefaultEquipment
+  m_EditorClassIdentifier: 
+  Name: "\uAC00\uC8FD \uBA38\uB9AC \uBCF4\uD638\uB300"
+  Description: "\uCD08\uBCF4\uC790\uC6A9 \uBA38\uB9AC \uBCF4\uD638\uB300\uC785\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 51321c6dcc51b2d4b85b2c90d4a16808, type: 3}
+  statModifier: {fileID: 11400000, guid: b537841d331e8cb4badddd4ae66fdef0, type: 2}
+  equipType: 0
