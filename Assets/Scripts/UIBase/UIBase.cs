@@ -15,7 +15,7 @@ public class UIBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        var texts = gameObject.GetComponentsInChildren<TMP_Text>();
+        
     }
     public virtual void Refresh()
     {

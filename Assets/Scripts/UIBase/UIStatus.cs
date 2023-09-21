@@ -20,7 +20,7 @@ public class UIStatus : UIBase
         _statsController = statsController;
         _stats = statsController.CurrentStats;
         _callBack = callBack;
-
+        _health = health;
         _data.text = StatsToDescription();
     }
 
@@ -32,7 +32,7 @@ public class UIStatus : UIBase
 
     public override void CloseUI()
     {
-        _callBack();
+        _callBack?.Invoke();
         base.CloseUI();
     }
 
@@ -42,12 +42,12 @@ public class UIStatus : UIBase
             return null;
         StringBuilder info = new StringBuilder();
 
-        info.AppendLine($"공 격 력 : {_stats.power}");
-        info.AppendLine($"방 어 력 : {_stats.defense}");
-        info.AppendLine($"회    피 : {_stats.avoidance}");
-        info.AppendLine($"체    력 : {_health.CurrentHealth}/{_stats.maxHealth}");
-        info.AppendLine($"이동속도 : {_stats.moveSpeed.ToString("F1")}");
-        info.AppendLine($"공격속도 : {_stats.attackSpeed.ToString("F1")}");
+        info.AppendLine($"ATK : {_stats.power}");
+        info.AppendLine($"DEF : {_stats.defense}");
+        info.AppendLine($"AVD : {_stats.avoidance}");
+        info.AppendLine($"H P : {_health.CurrentHealth}/{_stats.maxHealth}");
+        info.AppendLine($"SPD : {_stats.moveSpeed.ToString("F1")}");
+        info.AppendLine($"ATK SPD : {_stats.attackSpeed.ToString("F1")}");
 
         return info.ToString();
     }
