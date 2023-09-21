@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WeaponDefaultStats
   m_EditorClassIdentifier: 
   statChangeType: 1
-  maxHealth: 0
-  moveSpeed: 0
-  attackSpeed: 1
-  defense: 0
-  avoidance: 0
-  power: 5
+  maxHealth: 1
+  moveSpeed: 1
+  attackSpeed: 2
+  defense: 1
+  avoidance: 1
+  power: 2
