@@ -14,7 +14,7 @@ public class CharacterStatsController : MonoBehaviour
     private void Awake()
     {
         InitCharacterStats();
-        UpdateCharacterStats();
+        //UpdateCharacterStats();
     }
 
     private void Start()

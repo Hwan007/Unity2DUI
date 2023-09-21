@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b3b9229d1dc3e743b624ddfe48220e2, type: 3}
-  m_Name: DefaultEquipment
+  m_Name: ArmDefaultEquipment
   m_EditorClassIdentifier: 
-  Name: 
-  Description: 
-  ID: -1
-  statModifier: {fileID: 0}
-  equipType: 0
+  Name: "\uAC00\uC8FD \uC7A5\uAC11"
+  Description: "\uCD08\uBCF4\uC790\uC6A9 \uC7A5\uAC11\uC785\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: 064f0b9738c26c447837137b0c5c4593, type: 3}
+  statModifier: {fileID: 11400000, guid: 8fb62fc4d1abde4428f1b0ae1eb5f8ca, type: 2}
+  equipType: 2

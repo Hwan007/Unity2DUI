@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3b9229d1dc3e743b624ddfe48220e2, type: 3}
+  m_Name: LegDefaultEquipment
+  m_EditorClassIdentifier: 
+  Name: "\uAC00\uC8FD \uB2E4\uB9AC \uBCF4\uD638\uB300"
+  Description: "\uCD08\uBCF4\uC790\uC6A9 \uB2E4\uB9AC \uBCF4\uD638\uB300\uC785\uB2C8\uB2E4."
+  icon: {fileID: 21300000, guid: ad98d592e8540bc4bbe22bc1e26a9b1b, type: 3}
+  statModifier: {fileID: 11400000, guid: 7afa4d5d76a70fe47abfb612cfbb7f56, type: 2}
+  equipType: 3

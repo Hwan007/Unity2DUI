@@ -1,157 +1,95 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
-    [SerializeField] private TMP_Text _name;
-    [SerializeField] private TMP_Text _level;
-
-    [SerializeField] private GameObject Inventory;
-    private Canvas _inventory;
-    [SerializeField] private GameObject Status;
-    private Canvas _status;
-    [SerializeField] private GameObject Store;
-    private Canvas _store;
-    [SerializeField] private int BaseSortOrder;
-
+    [HideInInspector] public static UIManager Instance;
+    
     [SerializeField] private InputController _inputEvent;
 
-    private Stack<eUIType> UIStack = new Stack<eUIType>();
+    [SerializeField] private int BaseSortOrder;
+    [SerializeField] private List<UIBase> UIPrefabs = new List<UIBase>();
+
+    private List<UIBase> UIOpened = new List<UIBase>();
+    
+    private UIObjectPool UIObjectPool;
 
     private void Awake()
     {
         Instance = this;
+        UIObjectPool = GetComponent<UIObjectPool>();
     }
 
     private void Start()
     {
-        _inputEvent.OnExitEvent += CloseWindow;
-        _inventory = Inventory.GetComponent<Canvas>();
-        _status = Status.GetComponent<Canvas>();
-        _store = Store.GetComponent<Canvas>();
+        _inputEvent.OnExitEvent += CloseTopUI;
     }
 
-    public void CloseWindow(bool isPressed)
+    public void CloseTopUI(bool isPressed)
     {
         if (isPressed)
         {
-            if (UIStack.Count > 0)
+            if (UIOpened.Count > 0)
             {
-                var window = UIStack.Pop();
-                switch (window)
-                {
-                    case eUIType.Inventory:
-                        CloseInventory();
-                        break;
-                    case eUIType.Status:
-                        CloseStatus();
-                        break;
-                    case eUIType.Store:
-                        CloseStore();
-                        break;
-                    default:
-                        break;
-                }
+                UIOpened[0].CloseUI();
             }
         }
     }
 
-    private void ChangeName(string name)
+    private UIBase ShowUI(eUIType type)
     {
-        _name.text = name;
+        var obj = UIObjectPool.SpawnFromPool(type);
+        if (obj != null)
+        {
+            var uiBase = obj.GetComponent<UIBase>();
+            UIOpened.Insert(0, uiBase);
+
+            obj.SetActive(true);
+            return uiBase;
+        }
+        else
+            return null;
+    }
+    public T ShowUI<T>(eUIType type) where T : UIBase
+    {
+        return ShowUI(type) as T;
     }
 
-    private void ChangeLevel(int level)
+    public bool IsOpened<T>() where T : UIBase
     {
-        _level.text = level.ToString();
+        foreach (var ui in UIOpened)
+        {
+            if (ui is T)
+                return true;
+        }
+        return false;
     }
 
-    public void OpenInventory()
+    public void AllCloseUI()
     {
-        if (Inventory.activeInHierarchy == false)
+        foreach (var ui in UIOpened)
         {
-            Inventory.SetActive(true);
-            _inventory.sortingOrder = UIStack.Count + BaseSortOrder;
-            UIStack.Push(eUIType.Inventory);
+            ui.CloseUI();
         }
     }
-    public void CloseInventory()
-    {
-        if (Inventory.activeInHierarchy == true)
-        {
-            Inventory.SetActive(false);
-            RemoveUIType(eUIType.Inventory);
-        }
-    }
-    public void UpdateInventory()
-    {
 
-    }
-    public void OpenStatus()
+    public T GetUI<T>() where T : UIBase
     {
-        if (Status.activeInHierarchy == false)
+        foreach (var ui in UIOpened)
         {
-            Status.SetActive(true);
-            _status.sortingOrder = UIStack.Count + BaseSortOrder;
-            UIStack.Push(eUIType.Status);
+            if (ui is T)
+                return ui as T;
         }
+        return null;
     }
-    public void CloseStatus()
-    {
-        if (Status.activeInHierarchy == true)
-        {
-            Status.SetActive(false);
-            RemoveUIType(eUIType.Status);
-        }
-    }
-    public void UpdateStatus()
-    {
 
-    }
-    public void OpenStore()
+    public void RemoveUIInList(UIBase uiBase)
     {
-        if (Store.activeInHierarchy == false)
-        {
-            Store.SetActive(true);
-            _store.sortingOrder = UIStack.Count + BaseSortOrder;
-            UIStack.Push(eUIType.Store);
-        }
+        UIOpened.Remove(uiBase);
     }
-    public void CloseStore()
-    {
-        if (Store.activeInHierarchy == true)
-        {
-            Store.SetActive(false);
-            RemoveUIType(eUIType.Store);
-        }
-    }
-    private void RemoveUIType(eUIType type)
-    {
-        int count = UIStack.Count;
-        Stack<eUIType> temp = new Stack<eUIType>();
-        for (int i = 0; i < count; ++i)
-        {
-            var window = UIStack.Pop();
-            if (window == type)
-                continue;
-            temp.Push(window);
-        }
-        count = temp.Count;
-        for (int i = 0; i < count; ++i)
-        {
-            var window = temp.Pop();
-            UIStack.Push(window);
-        }
-    }
-}
-
-public enum eUIType
-{
-    Inventory,
-    Status,
-    Store,
 }
