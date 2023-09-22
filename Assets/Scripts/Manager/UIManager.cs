@@ -60,8 +60,14 @@ public class UIManager : MonoBehaviour
         {
             if (UIOpened.Count > 0)
             {
-                if (UIOpened[0] is UIGold || UIOpened[0] is UINameLevel || UIOpened[0])
-                    return;
+                while (UIOpened[0] is UIGold || UIOpened[0] is UINameLevel)
+                {
+                    if (UIOpened.Count == 2)
+                        return;
+                    var window = UIOpened[0];
+                    UIOpened.RemoveAt(0);
+                    UIOpened.Add(window);
+                }
                 UIOpened[0].CloseUI();
             }
         }
