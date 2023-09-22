@@ -37,7 +37,7 @@ public class UINameLevel : UIBase
     {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine(_playerInfoController.Info.Name);
-        sb.AppendLine(_playerInfoController.Info.Level.ToString());
+        sb.AppendLine("Lv. " + _playerInfoController.Info.Level.ToString());
         return sb.ToString();
     }
 }
