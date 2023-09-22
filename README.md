@@ -2,6 +2,7 @@
 #### 선택과제
 
 "스파르타 던전 - Unity  버전!"을 조금 변형 시켜봤습니다.
+빌드 버전 : https://github.com/Hwan007/Unity2DUI/releases/tag/0.0.1
 
 #### 구현 기능
 
